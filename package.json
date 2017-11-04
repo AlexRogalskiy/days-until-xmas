@@ -1,0 +1,13 @@
+{
+  "name": "days-until-xmas",
+  "version": "1.0.0",
+  "description": "Send every day a tweet with days until xmas",
+  "main": "index.js",
+  "author": "Niko Köbler, http://www.n-k.de, @dasniko",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.19.1",
+    "twitter": "^1.7.1"
+  },
+  "repository": "https://github.com/dasniko/days-until-xmas"
+}

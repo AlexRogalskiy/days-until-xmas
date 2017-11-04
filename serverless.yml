@@ -1,0 +1,28 @@
+service: days-until-xmas
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: eu-central-1
+  memorySize: 128
+  timeout: 3
+  stage: demo
+  deploymentBucket: dasniko.serverless.deployments.${self:provider.region}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sns:Publish
+      Resource: "${file(sls-props.yml):dlq}"
+  environment:
+    TWITTER_CONSUMER_KEY: ${file(sls-props.yml):twitter.consumer_key}
+    TWITTER_CONSUMER_SECRET: ${file(sls-props.yml):twitter.consumer_secret}
+    TWITTER_ACCESS_TOKEN_KEY: ${file(sls-props.yml):twitter.access_token_key}
+    TWITTER_ACCESS_TOKEN_SECRET: ${file(sls-props.yml):twitter.access_token_secret}
+
+functions:
+  cron:
+    handler: index.handler
+    events:
+      # Invoke Lambda function every day at 09:02 (GMT)
+      - schedule: cron(0 9 2 * ? *)
+    onError: "${file(sls-props.yml):dlq}"
