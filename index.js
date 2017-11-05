@@ -23,11 +23,11 @@ exports.handler = (event, context, callback) => {
 
   let status = '';
   if (days === 0) {
-    status = 'Today is #xmas!';
+    status = 'Merry #XMAS everyone! 🎄🎅';
   } else if (days === 1) {
-    status = 'Only 1 day until #xmas!';
+    status = 'Only 1 day until #xmas! 🎄🎅';
   } else {
-    status = 'Only ' + days + ' days until #xmas!';
+    status = 'Only ' + days + ' days until #xmas! 🎄🎅';
   }
   // console.log({status});
 
