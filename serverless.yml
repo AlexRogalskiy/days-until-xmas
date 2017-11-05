@@ -24,5 +24,5 @@ functions:
     handler: index.handler
     events:
       # Invoke Lambda function every day at 09:02 (GMT)
-      - schedule: cron(0 9 2 * ? *)
+      - schedule: cron(2 9 * * ? *)
     onError: "${file(sls-props.yml):dlq}"
