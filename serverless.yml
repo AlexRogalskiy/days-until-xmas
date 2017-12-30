@@ -23,6 +23,8 @@ functions:
   cron:
     handler: index.handler
     events:
-      # Invoke Lambda function every day at 09:02 (GMT)
-      - schedule: cron(2 9 * * ? *)
+      # Nov - Dec, every day at 09:02 (GMT)
+      - schedule: cron(2 9 * 11-12 ? *)
+      # Jan - Oct, on 24th of month at 08:05 (GMT)
+      - schedule: cron(5 8 24 1-10 ? *)
     onError: "${file(sls-props.yml):dlq}"
