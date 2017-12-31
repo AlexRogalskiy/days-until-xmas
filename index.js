@@ -19,19 +19,23 @@ exports.handler = (event, context, callback) => {
   }
   const xmas = moment(year + '-12-24').startOf('day');
   const days = xmas.diff(today, 'days');
+  const months = xmas.diff(today, 'months');
   console.log('days until xmas: ' + days);
+  console.log('months until xmas: ' + months);
 
   let status = '';
   if (days === 0) {
     status = 'Merry #XMAS everyone! 🎄🎅';
   } else if (days === 1) {
     status = 'Only 1 day until #xmas! 🎄🎅';
+  } else if (months >= 2) {
+    status = 'Only ' + months + ' months until #xmas! 🎄🎅';
   } else {
     status = 'Only ' + days + ' days until #xmas! 🎄🎅';
   }
   // console.log({status});
 
-  client.post('statuses/update', {status}, (error, tweet, response) => {
+  client.post('statuses/update', {status}, (error, tweet) => {
     if (error) {
       callback(error);
     }
