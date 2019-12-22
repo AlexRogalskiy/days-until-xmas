@@ -1,8 +1,10 @@
+org: dasniko
+app: xmas
 service: days-until-xmas
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs12.x
   region: eu-central-1
   memorySize: 128
   timeout: 3
@@ -23,8 +25,10 @@ functions:
   cron:
     handler: index.handler
     events:
-      # Nov - Dec, every day at 09:02 (GMT)
-      - schedule: cron(2 9 * 11-12 ? *)
+      # starting Nov 24, every day at 09:02 (GMT)
+      - schedule: cron(2 9 24-30 11 ? *)
+      # until Dec 24, every day at 09:02 (GMT)
+      - schedule: cron(2 9 1-24 12 ? *)
       # Jan - Oct, on 24th of month at 08:05 (GMT)
       - schedule: cron(5 8 24 1-10 ? *)
     onError: "${file(sls-props.yml):dlq}"
